@@ -59,7 +59,6 @@ public class InputPlayer : MonoBehaviour
         {
             interactionKeyPressed = false;
         }
-        
     }
     private void LateUpdate()
     {
@@ -73,7 +72,7 @@ public class InputPlayer : MonoBehaviour
         {
             if (collision.gameObject.layer == LayerMask.NameToLayer("Mushroom"))
             {
-                harvesting = true;         
+                harvesting = true;
                 Inventory.instance.Add(collision.gameObject.GetComponent<Item>());
                 collision.gameObject.GetComponent<MeshRenderer>().enabled = false;
                 collision.gameObject.GetComponent<BoxCollider>().enabled = false;

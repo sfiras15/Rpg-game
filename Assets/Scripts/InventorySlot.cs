@@ -27,7 +27,7 @@ public class InventorySlot : MonoBehaviour
     }
     public void RemoveFromInventory()
     {
-        Inventory.instance.RemoveItem(item,item.name);
+        Inventory.instance.RemoveItem(item.itemName);
     }
     public void UseItem()
     {

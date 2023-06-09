@@ -23,7 +23,6 @@ public class Inventory : MonoBehaviour
 
     public void UseItem(Item item)
     {
-        Debug.Log("test");
         if (item.name == "PurplePotion")
         {
             purpleAura.gameObject.SetActive(true);
@@ -90,26 +89,31 @@ public class Inventory : MonoBehaviour
         if (onItemChanged != null)
             onItemChanged.Invoke();
     }
-    public void RemoveItem(Item item,string itemName)
+    public void RemoveItem(string itemName,int amount = 1)
     {
         for(int i = 0; i < items.Count; i++)
         {
-            if (items[i].name == itemName)
+            if (items[i].itemName == itemName)
             {
-                items.Remove(items[i]);
+                if (amount  >= 1)
+                {
+                    items.Remove(items[i]);
+                    amount--;
+                }
             }
+                
         }
         
 
         if (onItemChanged != null)
             onItemChanged.Invoke();
     }
-    public int itemAmount(Item item)
+    public int itemAmount(Item item,string itemName)
     {
         int amount = 0;
         for (int i = 0; i < items.Count; i++)
         {
-            if (item.name == items[i].name)
+            if (item.itemName == items[i].itemName)
             {
                 amount++;
             }

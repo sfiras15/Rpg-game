@@ -13,9 +13,8 @@ public class Item : MonoBehaviour
     {
         if (usable)
         {
-            Debug.Log(this.itemName);
             Inventory.instance.UseItem(this);
-            Inventory.instance.RemoveItem(this,this.name);
+            Inventory.instance.RemoveItem(this.itemName);
         }
     }
 }
