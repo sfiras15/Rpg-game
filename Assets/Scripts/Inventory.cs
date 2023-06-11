@@ -8,7 +8,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public static Inventory instance;
-    [SerializeField] private float powerUpDuration = 5f;
+    [SerializeField] public float powerUpDuration = 5f;
     [SerializeField] private ParticleSystem purpleAura;
     [SerializeField] private ParticleSystem redAura;
     [SerializeField] private ParticleSystem greenAura;
@@ -23,21 +23,27 @@ public class Inventory : MonoBehaviour
 
     public void UseItem(Item item)
     {
-        if (item.name == "PurplePotion")
+        if (item.itemName == "PurplePotion")
         {
+            DisableRedAura();
+            DisableGreenAura();
             purpleAura.gameObject.SetActive(true);
             purpleAura.Play();
             Invoke(nameof(DisablePurpleAura), powerUpDuration);
 
         }
-        else if (item.name == "RedPotion")
+        else if (item.itemName == "RedPotion")
         {
+            DisablePurpleAura();
+            DisableGreenAura();
             redAura.gameObject.SetActive(true);
             redAura.Play();
             Invoke(nameof(DisableRedAura), powerUpDuration);
         }
         else
         {
+            DisablePurpleAura();
+            DisableRedAura();
             greenAura.gameObject.SetActive(true);
             greenAura.Play();
             Invoke(nameof(DisableGreenAura), powerUpDuration);  
@@ -51,6 +57,7 @@ public class Inventory : MonoBehaviour
     {
         purpleAura.gameObject.SetActive(false);
         purpleAura.Pause();
+
     }
     private void DisableGreenAura()
     {

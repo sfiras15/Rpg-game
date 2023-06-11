@@ -29,5 +29,6 @@ public class EnemyAnimation : MonoBehaviour
         {
             animator.SetTrigger("Die");
         }
+        animator.SetTrigger("Walk Forward");
     }
 }

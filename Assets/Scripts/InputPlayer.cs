@@ -10,6 +10,10 @@ public class InputPlayer : MonoBehaviour
     [SerializeField] private KeyCode collectKey;
     [SerializeField] private KeyCode interactionKey;
     [SerializeField] private KeyCode attackKey;
+
+    [SerializeField] private GameObject weapon;
+    [SerializeField] private BoxCollider weaponCollider;
+
     private bool collectKeyPressed;
     private bool interactionKeyPressed;
     public bool harvesting;
@@ -18,6 +22,7 @@ public class InputPlayer : MonoBehaviour
     public bool attacking;
 
     public bool usingItem;
+    public bool poweredUp;
     private void OnEnable()
     {
         Inventory.onItemUsed += PlayerState;
@@ -29,8 +34,29 @@ public class InputPlayer : MonoBehaviour
     public void PlayerState()
     {
         usingItem = true;
-        
+        poweredUp = true;
+        StartCoroutine(nameof(PowerDown));
     }
+    public IEnumerator PowerDown()
+    {
+        yield return new WaitForSeconds(Inventory.instance.powerUpDuration);
+        poweredUp = false;
+    }
+    private void Awake()
+    {
+        weaponCollider = weapon.GetComponentInChildren<BoxCollider>();
+        weaponCollider.enabled = false;
+    }
+
+    public void StartAttack()
+    {
+        weaponCollider.enabled = true;
+    }
+    public void EndAttack()
+    {
+        weaponCollider.enabled = false;
+    }
+
     // Update is called once per frame
     void Update()
     {

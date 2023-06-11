@@ -16,10 +16,9 @@ public class Enemy : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         takingDamage = false;
-        dead = false;
         healthBar.UpdateHealth(healthPoints.GetMaxHealth, healthPoints.GetCurrentHealth);
     }
 }
